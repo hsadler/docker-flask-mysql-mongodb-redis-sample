@@ -1,0 +1,27 @@
+
+version: '3.1'
+
+services:
+  flaskapp:
+    image: flask:latest
+    links:
+      - mysql:mysql
+    volumes:
+      - ./server:/server
+    expose:
+      - "3031"
+      - "3032"
+    command: do_this
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=example
+    ports:
+     - "3306:3306"
+  redis:
+    image: redis:latest
+    environment:
+      - REDIS_PASS=example
+    ports:
+      - "6379:6379"
