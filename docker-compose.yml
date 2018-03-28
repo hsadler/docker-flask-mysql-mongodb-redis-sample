@@ -3,25 +3,28 @@ version: '3.1'
 
 services:
   flaskapp:
-    image: flask:latest
+    build: .
+    # restart: always
     links:
       - mysql:mysql
+      - redis:redis
     volumes:
       - ./server:/server
-    expose:
-      - "3031"
-      - "3032"
-    command: do_this
+    ports:
+      - "5000:5000"
+    command: /bin/sh -c "cd /server && python app.py"
   mysql:
     image: mysql:latest
-    restart: always
+    # restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=example
+  adminer:
+    image: adminer
+    # restart: always
     ports:
-     - "3306:3306"
+      - "8080:8080"
   redis:
-    image: redis:latest
+    image: redis:alpine
+    # restart: always
     environment:
       - REDIS_PASS=example
-    ports:
-      - "6379:6379"

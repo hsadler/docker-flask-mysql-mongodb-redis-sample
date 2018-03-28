@@ -1,5 +1,5 @@
 
-# this is an example, redo this
+# this is an example
 
 import time
 
