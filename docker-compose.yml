@@ -1,0 +1,42 @@
+
+version: '3.1'
+
+services:
+  flaskapp:
+    build: .
+    image: flaskapp
+    container_name: flaskapp
+    restart: always
+    links:
+      - mysql:mysql
+      - redis:redis
+    volumes:
+      - ./server:/server
+    ports:
+      - "5000:5000"
+    command: /bin/sh -c "cd /server && python app.py"
+  mysql:
+    image: mysql:latest
+    container_name: flaskapp-mysql
+    restart: always
+    volumes:
+     - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=example
+      - MYSQL_DATABASE=test
+  adminer:
+    image: adminer
+    container_name: flaskapp-adminer
+    restart: always
+    ports:
+      - "8080:8080"
+  redis:
+    image: redis:alpine
+    container_name: flaskapp-redis
+    restart: always
+    environment:
+      - REDIS_PASS=example
+
+
+
+
