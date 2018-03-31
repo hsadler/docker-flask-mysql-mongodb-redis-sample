@@ -81,8 +81,8 @@ def get_mongo():
     mongo_data = get_mongo_data()
     return 'Here\'s the mongo datas:\n{}'.format(str(mongo_data))
 
-@app.route('/get-cache')
-def get_cache():
+@app.route('/get-redis')
+def get_redis():
     count = get_hit_cache_count()
     return 'Hello World! I have been seen {} times.\n'.format(str(count))
 
