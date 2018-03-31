@@ -28,12 +28,10 @@ services:
     image: adminer
     container_name: flaskapp-adminer
     restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=example
-  adminer:
-    image: adminer
     ports:
       - "8080:8080"
+    environment:
+      - MYSQL_ROOT_PASSWORD=example
   redis:
     image: redis:alpine
     container_name: flaskapp-redis
