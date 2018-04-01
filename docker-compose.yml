@@ -31,8 +31,6 @@ services:
     restart: always
     ports:
       - "8080:8080"
-    environment:
-      - MYSQL_ROOT_PASSWORD=example
   mongo:
     image: mongo:latest
     container_name: flaskapp-mongo
@@ -44,4 +42,9 @@ services:
     image: redis:alpine
     container_name: flaskapp-redis
     restart: always
+    volumes:
+     - ./redis:/data
+
+
+
 
